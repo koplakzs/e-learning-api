@@ -8,7 +8,6 @@ use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\EnrollResource;
 use App\Interfaces\CourseRepositoryInterface;
-use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
