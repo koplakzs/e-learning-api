@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->foreignUlid('lecture_id')->constrained('users', 'id');
+            $table->foreignUlid('assignment_id')->constrained('assignments', 'id');
+            $table->foreignUlid('student_id')->constrained('users', 'id');
+            $table->string('file_path');
+            $table->integer('score')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('submissions');
     }
 };
