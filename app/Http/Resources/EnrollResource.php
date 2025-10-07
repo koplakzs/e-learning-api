@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseResource extends JsonResource
+class EnrollResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +14,10 @@ class CourseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this->lecture);
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'dosen' => new UserResource($this->lecture),
+            'course' => new CourseResource($this->course),
+            'student' => new UserResource($this->student),
         ];
     }
 }

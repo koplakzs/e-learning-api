@@ -12,10 +12,13 @@ class Enroll extends Model
 
     protected $fillable = ['course_id', 'user_id'];
 
-    public function students() {
-        return $this->belongsToMany(User::class);
+    public function student()
+    {
+        // return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function courses() {
-        return $this->belongsToMany(Course::class);
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }
