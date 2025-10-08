@@ -5,9 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
-use App\Models\Discussion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'store']);
@@ -20,6 +19,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('discussions', 'index');
         Route::post('discussions', 'store');
         Route::post('discussions/{id}/replies', 'reply');
+    });
+    Route::controller(StatisticController::class)->group(function () {
+        Route::get('reports/assignments', 'assignments');
+        Route::get('reports/students/{id}', 'students');
+        Route::get('reports/courses', 'courses');
     });
     Route::middleware('role:dosen')->group(function () {
         Route::controller(CourseController::class)->group(function () {

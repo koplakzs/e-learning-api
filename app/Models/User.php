@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
     public function submissions()
     {
-        return $this->hasMany(Submission::class);
+        return $this->hasMany(Submission::class, 'student_id');
     }
     public function discussion()
     {
