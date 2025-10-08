@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MaterialController;
@@ -20,11 +21,16 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('courses/{id}', 'destroy');
         });
         Route::post('materials', [MaterialController::class, 'store']);
+        Route::get('assignments', [AssignmentController::class, 'index']);
+        Route::post('assignments', [AssignmentController::class, 'store']);
+        Route::post('submissions/{id}/grade', [AssignmentController::class, 'score']);
     });
     Route::middleware('role:mahasiswa')->group(function () {
         Route::controller(CourseController::class)->group(function () {
             Route::post('courses/{id}/enroll', 'enroll');
         });
         Route::get('materials/{id}/download', [MaterialController::class, 'download']);
+        Route::post('submissions', [AssignmentController::class, 'submission']);
     });
+    Route::post('logout', [AuthController::class, 'logout']);
 });
